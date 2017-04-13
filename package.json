@@ -33,7 +33,7 @@
   "configSchema": "luxtronik2-plugin-config-schema.coffee",
   "dependencies": {
     "dateformat": "2.0.0",
-    "luxtronik2": "0.1.0",
+    "luxtronik2": "0.1.2",
     "pimatic-plugin-commons": "^0.9.2"
   },
   "peerDependencies": {
