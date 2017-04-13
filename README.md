@@ -36,7 +36,7 @@ The plugin provides on device `Luxtronic2Data` which currently supports the foll
     },
 
 
-## Configuration
+## Installation
 Until released, this plugin can pe installed by executing the following command in the pimatic-app directory.
 
 `npm install bakito/pimatic-luxtronik2#master --unsafe-perm`
