@@ -25,10 +25,13 @@
     "types.coffee"
   ],
   "version": "0.0.2",
-  "homepage": "http://your-plugin-website",
+  "homepage": "https://github.com/bakito/pimatic-luxtronik2",
   "repository": {
     "type": "git",
-    "url": "git://github.com:bakito/pimatic-luxtronik2.git"
+    "url": "git://github.com/bakito/pimatic-luxtronik2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bakito/pimatic-luxtronik2/issues"
   },
   "configSchema": "luxtronik2-plugin-config-schema.coffee",
   "dependencies": {
