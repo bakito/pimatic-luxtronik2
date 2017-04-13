@@ -24,7 +24,7 @@
     "device-config-schema.coffee",
     "types.coffee"
   ],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "http://your-plugin-website",
   "repository": {
     "type": "git",
