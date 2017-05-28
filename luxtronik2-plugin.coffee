@@ -147,7 +147,7 @@ module.exports = (env) ->
 
         if new Date().toDateString() == error.date.toDateString()
           errorMessage = DateFormat(error.date, 'dd.MM.yyyy HH:MM:ss') + ' - ' + error.message + ' (' + error.code + ')'
-          env.logger.error('Got luxtronik error: ', errorMessage)
+          env.logger.debug('Got luxtronik error: ', errorMessage)
           return errorMessage
 
       return 'N/A'
