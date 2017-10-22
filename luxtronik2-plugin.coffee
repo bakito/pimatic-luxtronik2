@@ -106,8 +106,8 @@ module.exports = (env) ->
       pump = @pump
       new Promise((resolve, reject) ->
         pump.read false, (err, data) ->
-          if data.error
-            reject data.error
+          if err
+            reject err
           else
             resolve data
           return
