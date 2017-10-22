@@ -12,8 +12,7 @@ if [ $? -eq 1 ] ; then
   echo "pimatic could not be started correctly"
   exit 1
 fi
-
-falsePositives=( "\[pimatic-luxtronik2\] Unable to connect: Error: connect ECONNREFUSED 127.0.0.1:8888" )
+falsePositives=( "\[pimatic-luxtronik2\] \{ \[Error: connect ECONNREFUSED 127.0.0.1:8888" )
 
 for fp in "${falsePositives[@]}"
 do
