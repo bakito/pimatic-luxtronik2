@@ -7,14 +7,14 @@
 
 module.exports = (env) ->
 
-  # Require the  bluebird promise library
+# Require the  bluebird promise library
   Promise = env.require 'bluebird'
 
   # Require the [cassert library](https://github.com/rhoot/cassert).
   assert = env.require 'cassert'
 
   # Include your own dependencies with nodes global require function:
-  Luxtronik = require 'luxtronik2'
+  luxtronik = require 'luxtronik2'
   DateFormat = require 'dateformat'
   commons = require('pimatic-plugin-commons')(env)
 
@@ -27,7 +27,7 @@ module.exports = (env) ->
       @host = config.host
       @port = config.port
       @interval = config.interval
-      @pump = new Luxtronik(@host, @port)
+      @pump = luxtronik.createConnection(@host, @port)
 
 
       # register devices
@@ -44,42 +44,42 @@ module.exports = (env) ->
         description: "The current outside temperature"
         type: "number"
         unit: '°C'
-        acronym : "Outside"
+        acronym: "Outside"
       temperatureOutsideAvg:
         description: "The average outside temperature"
         type: "number"
         unit: '°C'
-        acronym : "Outside avg"
+        acronym: "Outside avg"
       temperatureHotWater:
         description: "The current water temperature"
         type: "number"
         unit: '°C'
-        acronym : "Water current"
+        acronym: "Water current"
       temperatureHotWaterTarget:
         description: "The target water temperature"
         type: "number"
         unit: '°C'
-        acronym : "Water target"
+        acronym: "Water target"
       heatpumpState:
         description: "The current heat pump state"
         type: "string"
-        acronym : "State"
+        acronym: "State"
       heatpumpExtendedState:
         description: "The current extended heat pump state"
         type: "string"
-        acronym : "Extended State"
+        acronym: "Extended State"
       lastError:
         description: "The last error"
         type: "string"
-        acronym : "Last Error"
+        acronym: "Last Error"
 
     temperatureOutside: 0.0
     temperatureOutsideAvg: 0.0
     temperatureHotWater: 0.0
     temperatureHotWaterTarget: 0.0
-    heatpumpState:'N/A'
-    heatpumpExtendedState:'N/A'
-    lastError:'N/A'
+    heatpumpState: 'N/A'
+    heatpumpExtendedState: 'N/A'
+    lastError: 'N/A'
 
 
     constructor: (@config, @plugin, @service) ->
@@ -105,15 +105,16 @@ module.exports = (env) ->
     _requestUpdate: ->
       pump = @pump
       new Promise((resolve, reject) ->
-        pump.read false, (data) ->
-          if data.error
+        pump.read false, (err, data) ->
+          if err
+            reject err
+          else if data.error
             reject data.error
           else
             resolve data
           return
         return
       ).then((data) =>
-
         @temperatureOutside = data.values.temperature_outside
         @temperatureOutsideAvg = data.values.temperature_outside_avg
         @temperatureHotWater = data.values.temperature_hot_water
@@ -121,7 +122,7 @@ module.exports = (env) ->
         @heatpumpState = data.values.heatpump_state_string
         @heatpumpExtendedState = data.values.heatpump_extendet_state_string
 
-        @lastError= @_extractError data.values.errors
+        @lastError = @_extractError data.values.errors
 
         env.logger.debug('data received')
 
