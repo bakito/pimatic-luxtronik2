@@ -132,7 +132,7 @@ module.exports = (env) ->
         @emit "heatpumpExtendedState", @heatpumpExtendedState
         @emit "lastError", @lastError
       ).catch((error) =>
-        if (error == 'busy')
+        if (error.message == 'heatpump busy')
           env.logger.debug('The device is currently busy.')
         else
           env.logger.error(error)
