@@ -108,8 +108,6 @@ module.exports = (env) ->
         pump.read false, (err, data) ->
           if err
             reject err
-          else if data.error
-            reject data.error
           else
             resolve data
           return
